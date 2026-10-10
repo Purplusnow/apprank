@@ -1,0 +1,30 @@
+# Phase 0: Actions 러너 IP에서 스토어 차트 수집이 되는지만 검증한다.
+# 이 결과에 전체 아키텍처가 달려 있으므로 코드를 더 쓰기 전에 먼저 돌린다.
+name: Phase 0 — IP spike check
+
+on:
+  workflow_dispatch:
+    inputs:
+      concurrency:
+        description: '동시 요청 수'
+        required: false
+        default: '8'
+
+jobs:
+  spike:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install
+        run: npm install --no-audit --no-fund
+
+      - name: Run spike
+        env:
+          CONCURRENCY: ${{ inputs.concurrency }}
+        run: npm run spike

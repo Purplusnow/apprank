@@ -1,0 +1,12 @@
+{
+  "name": "apprank",
+  "private": true,
+  "type": "module",
+  "description": "Google Play / App Store chart ranks across countries - static site on GitHub Pages",
+  "scripts": {
+    "spike": "node tools/spike.mjs"
+  },
+  "dependencies": {
+    "google-play-scraper": "^10.0.0"
+  }
+}
